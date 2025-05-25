@@ -1,84 +1,51 @@
-<!DOCTYPE html>
+App.js
 
-<head>
+import React, { useState } from 'react';
 
- <title>My First Web Page |VCET</title>
+import './App.css';
 
-</head>
+function App() {
 
-<body>
+const [text, setText] = useState(''); // Declare a state variable 'text' and a function 'setText' to update it
 
- <!-- Moving text -->
+const handleInputChange = (event) => { // Event handler to update the state as user types
 
- <marquee>Welcome to VCET</marquee><!-- Different heading tags -->
+setText(event.target.value);
 
- <h1>This is an H1 heading</h1>
+};
 
- <h2>This is an H2 heading</h2>
+return (
 
- <h3>This is an H3 heading</h3>
+<div className="container" >
 
- <h4>This is an H4 heading</h4>
+<h1> Hello VCET</h1>
 
- <h5>This is an H5 heading</h5>
+<input type="text"
 
- <h6>This is an H6 heading</h6>
+value={text} // Bind input value to state
 
- <!-- Paragraph -->
+onChange={handleInputChange} // Update state on input change
 
- <p>This is a paragraph demonstrating the use of the paragraph tag in HTML.</p>
+placeholder="Type something..."
 
- <!-- Horizontal line -->
+/>
 
- <hr>
+<h1>{text || "Type something..."}</h1>
 
- <!-- Line break -->
+</div>
 
- <p>This is a line of text before the break.<br>This is a line of text after the break.</p>
+);
 
- <!-- Block Quote -->
+}
 
- <blockquote>
+export default App;
 
- This is a blockquote. It is used to display a quotation or excerpt from another source.
+App.CSS
 
- </blockquote>
+.container {
 
- <!-- Pre tag -->
+text-align: center;
 
- <pre>
+margin-top: 50px;
 
-This is preformatted text.
-
-It preserves spaces and line breaks.
-
- </pre>
-
- <!-- Different Logical Style tags -->
-
- <p>This is <b>bold</b> text.</p>
-
- <p>This is <i>italicized</i> text.</p>
-
- <p>This is <u>underlined</u> text.</p>
-
- <p>This is <sup>superscript</sup> text.</p>
-
- <p>This is <sub>subscript</sub> text.</p>
-
- <p>This is <em>emphasized</em> text.</p>
-
- <p>This is <strong>strong</strong> text.</p>
-
- <p>This is <mark>highlighted</mark> text.</p>
-<p>This is <small>small</small> text.</p>
-
- <p>This is <del>deleted</del> text.</p>
-
- <p>This is <ins>inserted</ins> text.</p>
-
- <p>This is <code>inline code</code> text.</p>
-
-</body>
-
-</html>
+}
