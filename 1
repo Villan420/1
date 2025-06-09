@@ -6,9 +6,9 @@ import './App.css';
 
 function App() {
 
-const [text, setText] = useState(''); // Declare a state variable 'text' and a function 'setText' to update it
+const [text, setText] = useState(''); 
 
-const handleInputChange = (event) => { // Event handler to update the state as user types
+const handleInputChange = (event) => { 
 
 setText(event.target.value);
 
@@ -22,9 +22,9 @@ return (
 
 <input type="text"
 
-value={text} // Bind input value to state
+value={text} 
 
-onChange={handleInputChange} // Update state on input change
+onChange={handleInputChange} 
 
 placeholder="Type something..."
 
