@@ -1,51 +1,77 @@
-App.js
+import pandas as pd
 
-import React, { useState } from 'react';
+import numpy as np
 
-import './App.css';
+import matplotlib.pyplot as plt
 
-function App() {
+import seaborn as sns
 
-const [text, setText] = useState(''); 
+df=pd.read_excel('California.xlsx')
 
-const handleInputChange = (event) => { 
+print("first few rows of dataset:")
 
-setText(event.target.value);
+print(df.head())
 
-};
+print(df.nunique())
 
-return (
+print(df.describe().T)
 
-<div className="container" >
+print(df.shape)
 
-<h1> Hello VCET</h1>
+def plot_histograms(dataframe):
 
-<input type="text"
+dataframe.hist(bins=10,figsize=(15,10),color='skyblue',edgecolor='black')
 
-value={text} 
+plt.suptitle("histogram for numerical features",fontsize=20)
 
-onChange={handleInputChange} 
+plt.show()
 
-placeholder="Type something..."
+def plot_boxplots(dataframe):
 
-/>
+num_columns=dataframe.select_dtypes(include=[np.number]).columns
 
-<h1>{text || "Type something..."}</h1>
+for column in num_columns:
 
-</div>
+plt.figure(figsize=(10,5))
 
-);
+sns.boxplot(data=dataframe,x=column,color='lightgreen')
 
-}
+plt.title(f"Box plot of {column}",fontsize=14)
 
-export default App;
+plt.show()
 
-App.CSS
+def analyze_outliers(dataframe):
 
-.container {
+num_columns=dataframe.select_dtypes(include=[np.number]).columns
 
-text-align: center;
+for column in num_columns:
 
-margin-top: 50px;
+Q1=dataframe[column].quantile(0.25)
 
-}
+Q3=dataframe[column].quantile(0.75)
+
+IQR=Q3-Q1
+
+lower_bound=Q1-1.5*IQR
+
+upper_bound=Q3+1.5*IQR
+
+outliers=dataframe[(dataframe[column]<lower_bound)|(dataframe[column]>upper_bound)]
+
+print(f"Feature:{column}")
+
+print(f"number of outliers:{len(outliers)}")
+
+print(f"outliers values:\n{outliers[column].values}\n")
+
+print("\n---plotting histogram---")
+
+plot_histograms(df)
+
+print("\n---plotting Boxplots---")
+
+plot_boxplots(df)
+
+print("\n---analysing outliers---")
+
+analyze_outliers(df
